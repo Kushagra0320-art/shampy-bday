@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Shampy! 🥰</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fdf2f8, #e9d5ff, #d0ebff);
+      color: #444;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: rgba(255,255,255,0.95);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      text-align: center;
+      color: #d946ef;
+      margin: 20px 0;
+    }
+    .section { display: none; text-align: center; }
+    .section.active { display: block; animation: fadeIn 1s; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    /* Pastel Unicorns in corners */
+    .unicorn {
+      position: absolute;
+      font-size: 60px;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+    .tl { top: 10px; left: 10px; }
+    .tr { top: 10px; right: 10px; }
+    .bl { bottom: 10px; left: 10px; }
+    .br { bottom: 10px; right: 10px; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    input, button {
+      padding: 14px 20px;
+      margin: 15px;
+      border-radius: 30px;
+      font-size: 18px;
+    }
+    input {
+      border: 2px solid #c084fc;
+      width: 80%;
+      max-width: 400px;
+    }
+    button {
+      background: #c084fc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background: #a855f7; }
+
+    .feedback { margin: 20px; font-size: 20px; font-weight: bold; }
+    .correct { color: #22c55e; }
+    .wrong { color: #ef4444; }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 400px;
+      margin: 30px auto;
+    }
+    .card {
+      width: 80px; height: 80px;
+      background: #e9d5ff;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+    .card.flipped, .card.matched { background: white; transform: rotateY(180deg); }
+
+    .reasons {
+      text-align: left;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    .letter {
+      background: #fce7f3;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 15px;
+      font-size: 18px;
+    }
+
+    .final-wish {
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23f9a8d4" width="800" height="600"/><path fill="%23fbbf24" d="M400 300l-40-120 100 80-120-40 80-100z"/></svg>'), linear-gradient(#fce7f3, #e0e7ff);
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 40px;
+      animation: fireworks 8s infinite;
+    }
+    @keyframes fireworks {
+      0%,100% { background-position: 0 0; }
+      50% { background-position: 100px 100px; }
+    }
+    .final-wish h1 { font-size: 60px; color: #dc2626; }
+    .final-wish p { font-size: 24px; max-width: 800px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="unicorn tl">🦄</div>
+  <div class="unicorn tr">🦄</div>
+  <div class="unicorn bl">🦄</div>
+  <div class="unicorn br">🦄</div>
+
+  <!-- Intro -->
+  <div id="intro" class="section active">
+    <h1>Happy Birthday Shampy! 🎂</h1>
+    <p>Hey Tushika (my favorite Shampy in the whole world 🌍),<br>Today is your special day! I made this little website just for you 💜</p>
+    <button onclick="nextSection('riddle1')">Start the Adventure! ✨</button>
+  </div>
+
+  <!-- Riddles -->
+  <div id="riddle1" class="section">
+    <h1>Riddle 1</h1>
+    <p>I’m sweet, round, and have candles on top...<br>What am I?</p>
+    <input type="text" id="ans1" placeholder="Your answer">
+    <button onclick="checkAnswer('ans1','cake','riddle2')">Submit</button>
+    <div class="feedback" id="fb1"></div>
+  </div>
+
+  <div id="riddle2" class="section">
+    <h1>Riddle 2</h1>
+    <p>I’m a number, and today you turn this many...<br>You were born in 2003, so in 2025 you are...?</p>
+    <input type="text" id="ans2" placeholder="??">
+    <button onclick="checkAnswer('ans2','22','reasons')">Submit</button>
+    <div class="feedback" id="fb2"></div>
+  </div>
+
+  <!-- A-Z Reasons -->
+  <div id="reasons" class="section">
+    <h1>Why I Love Having You as My Sister 💕</h1>
+    <div class="reasons">
+      <div class="letter"><strong>A</strong> - Always there when I need you</div>
+      <div class="letter"><strong>B</strong> - Best partner-in-crime ever</div>
+      <div class="letter"><strong>C</strong> - Cutest smile in the world</div>
+      <div class="letter"><strong>D</strong> - Drama queen but my queen</div>
+      <div class="letter"><strong>E</strong> - Endless gossip sessions</div>
+      <div class="letter"><strong>F</strong> - Favorite person to annoy</div>
+      <div class="letter"><strong>G</strong> - Gives the best hugs</div>
+      <div class="letter"><strong>H</strong> - Heart of gold</div>
+      <div class="letter"><strong>I</strong> - Inspires me every day</div>
+      <div class="letter"><strong>J</strong> - Jokes that only we understand</div>
+      <div class="letter"><strong>K</strong> - Kindest soul I know</div>
+      <div class="letter"><strong>L</strong> - Loves me even when I’m annoying</div>
+      <div class="letter"><strong>M</strong> - My Shampy forever</div>
+      <div class="letter"><strong>N</strong> - Never lets me feel alone</div>
+      <div class="letter"><strong>O</strong> - One in a million</div>
+      <div class="letter"><strong>P</strong> - Perfect sister</div>
+      <div class="letter"><strong>Q</strong> - Queen of my heart</div>
+      <div class="letter"><strong>R</strong> - Real-life angel</div>
+      <div class="letter"><strong>S</strong> - Sweetest Shampy</div>
+      <div class="letter"><strong>T</strong> - Tushika = my everything</div>
+      <div class="letter"><strong>U</strong> - Unconditionally loves me</div>
+      <div class="letter"><strong>V</strong> - Very very special</div>
+      <div class="letter"><strong>W</strong> - World’s best sister</div>
+      <div class="letter"><strong>X</strong> - Xtraordinary human</div>
+      <div class="letter"><strong>Y</strong> - You complete our family</div>
+      <div class="letter"><strong>Z</strong> - Zero chances I’d trade you</div>
+    </div>
+    <button onclick="nextSection('game')">Next: Memory Game 🎮</button>
+  </div>
+
+  <!-- Memory Game -->
+  <div id="game" class="section">
+    <h1>Memory Game for Shampy 💝</h1>
+    <p>Match all the pairs to see the final surprise!</p>
+    <div class="game-grid" id="memoryGrid"></div>
+    <p>Matches: <span id="matches">0</span>/8</p>
+    <button id="gameBtn" onclick="nextSection('final')" style="display:none">See Your Birthday Wish! 🎉</button>
+  </div>
+
+  <!-- Final Wish -->
+  <div id="final" class="section final-wish">
+    <h1>HAPPY 22nd BIRTHDAY SHAMPY!!! 🎉🎂</h1>
+    <p>My dearest Tushika,<br><br>
+    Aaj tum 22 ki ho gayi ho aur har saal se zyada sundar, smart aur amazing lag rahi ho 💕<br>
+    Tum meri chhoti si duniya ho, meri best friend, meri partner-in-crime aur meri favorite insan.<br><br>
+    I feel so lucky ki mujhe tum jaisi sister mili. Tumhare bina life bilkul boring hoti!<br><br>
+    Wish you the happiest, healthiest, and most magical year ahead.<br>
+    May all your dreams come true, meri Shampy jaan 🦄✨<br><br>
+    Forever your annoying but loving brother ❤️<br><br>
+    Happy Birthday once again, meri jaan! 🥰</p>
+  </div>
+</div>
+
+<script>
+  const emojis = ['💕','💕','🌸','🌸','🦄','🦄','🎂','🎂','🎁','🎁','✨','✨','🎈','🎈','🌟','🌟'];
+  let flipped = [];
+  let matches = 0;
+
+  function nextSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (id === 'game') initGame();
+  }
+
+  function checkAnswer(inputId, correct, next) {
+    const ans = document.getElementById(inputId).value.trim().toLowerCase();
+    const fb = document.getElementById('fb'+inputId.slice(3));
+    if (ans === correct || ans.includes(correct)) {
+      fb.innerHTML = 'Correct! 🥳';
+      fb.className = 'feedback correct';
+      setTimeout(() => nextSection(next), 1500);
+    } else {
+      fb.innerHTML = 'Oops! Try again 💭';
+      fb.className = 'feedback wrong';
+    }
+  }
+
+  function initGame() {
+    const grid = document.getElementById('memoryGrid');
+    grid.innerHTML = '';
+    const shuffled = emojis.sort(() => 0.5 - Math.random());
+    shuffled.forEach((emoji, i) => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.emoji = emoji;
+      card.onclick = () => flipCard(card);
+      grid.appendChild(card);
+    });
+  }
+
+  function flipCard(card) {
+    if (flipped.length === 2 || card.classList.contains('flipped')) return;
+    card.classList.add('flipped');
+    card.innerHTML = card.dataset.emoji;
+    flipped.push(card);
+    if (flipped.length === 2) {
+      setTimeout(checkMatch, 800);
+    }
+  }
+
+  function checkMatch() {
+    if (flipped[0].dataset.emoji === flipped[1].dataset.emoji) {
+      flipped.forEach(c => c.classList.add('matched'));
+      matches++;
+      document.getElementById('matches').textContent = matches;
+      if (matches === 8) {
+        document.getElementById('gameBtn').style.display = 'block';
+      }
+    } else {
+      flipped.forEach(c => {
+        c.classList.remove('flipped');
+        c.innerHTML = '';
+      });
+    }
+    flipped = [];
+  }
+</script>
+</body>
+</html>
